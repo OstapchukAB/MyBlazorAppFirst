@@ -19,6 +19,6 @@
         // var response = await httpClient.GetAsync("http://localhost:5118/getip");
         // ipdefault=await response.Content.ReadAsStringAsync();
         var ip=  ClientContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString();
-        ipdefault = ip;
+        ipdefault = ip??"";
     }
 }
