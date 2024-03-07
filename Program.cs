@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using MyBlazorAppFirst.Components;
 using MyBlazorAppFirst.Components.Account;
 using MyBlazorAppFirst.Data;
+using MyBlazorAppFirst.Components.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,7 @@ builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<IdentityUserAccessor>();
 builder.Services.AddScoped<IdentityRedirectManager>();
 builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
+builder.Services.AddScoped<VendorService>();
 
 builder.Services.AddAuthentication(options =>
     {
@@ -24,10 +26,11 @@ builder.Services.AddAuthentication(options =>
     })
     .AddIdentityCookies();
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("PostgresWeb") 
+    ?? throw new InvalidOperationException("Connection string 'PostgresWeb' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     //options.UseSqlServer(connectionString));
-    options.UseNpgsql(connectionString));
+    options.UseNpgsql(connectionString).UseSnakeCaseNamingConvention());
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)

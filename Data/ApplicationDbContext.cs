@@ -3,7 +3,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MyBlazorAppFirst.Data
 {
-    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<ApplicationUser>(options)
+    //public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<ApplicationUser>(options)
+    //{
+    //}
+    public class ApplicationDbContext: DbContext
     {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options) 
+        { 
+        
+        }
+        public DbSet<Vendor> Vendors { get; set; }
     }
 }
