@@ -12,7 +12,7 @@ namespace MyBlazorAppFirst.Components.Services
 
         public List<Vendor> DisplayVendors()
         {
-            return _context.Vendors.ToList();
+            return _context.Vendor.ToList();
         }
     }
 }

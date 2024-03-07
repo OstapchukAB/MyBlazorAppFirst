@@ -12,6 +12,6 @@ namespace MyBlazorAppFirst.Data
         { 
         
         }
-        public DbSet<Vendor> Vendors { get; set; }
+        public DbSet<Vendor> Vendor { get; set; }
     }
 }
